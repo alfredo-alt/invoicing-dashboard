@@ -75,9 +75,53 @@ const deleteInvoice = async (req, res) => {
   }
 };
 
+// GET summary report: totals by month
+const getMonthlyReport = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        TO_CHAR(invoice_date, 'YYYY-MM') AS month,
+        COUNT(*) AS invoice_count,
+        SUM(subtotal) AS total_subtotal,
+        SUM(tax) AS total_tax,
+        SUM(total_amount) AS total_revenue
+      FROM invoices
+      GROUP BY TO_CHAR(invoice_date, 'YYYY-MM')
+      ORDER BY month DESC
+    `);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to generate monthly report' });
+  }
+};
+
+// GET summary report: totals by product
+const getProductReport = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        product,
+        category,
+        COUNT(*) AS times_sold,
+        SUM(quantity) AS total_quantity,
+        SUM(total_amount) AS total_revenue
+      FROM invoices
+      GROUP BY product, category
+      ORDER BY total_revenue DESC
+    `);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to generate product report' });
+  }
+};
+
 module.exports = {
   getAllInvoices,
   getInvoiceById,
   createInvoice,
   deleteInvoice,
+  getMonthlyReport,
+  getProductReport,
 };
