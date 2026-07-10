@@ -1,18 +1,15 @@
 const express = require('express');
 const pool = require('./config/db');
+const invoicesRoutes = require('./routes/invoices.routes');
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
-app.get('/', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.json({ message: 'Database connected successfully', time: result.rows[0] });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Database connection failed' });
-  }
+app.use('/api/invoices', invoicesRoutes);
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Invoicing API is running' });
 });
 
 const PORT = process.env.PORT || 3000;
