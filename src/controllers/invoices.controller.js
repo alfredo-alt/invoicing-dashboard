@@ -34,12 +34,6 @@ const getInvoiceById = async (req, res) => {
 // POST create a new invoice
 const createInvoice = async (req, res) => {
   const { invoice_date, product, category, customer, quantity, subtotal, tax } = req.body;
-
-  // Basic validation
-  if (!invoice_date || !product || !subtotal || !tax) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
   const total_amount = parseFloat(subtotal) + parseFloat(tax);
 
   try {

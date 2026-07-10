@@ -8,14 +8,14 @@ const {
   getMonthlyReport,
   getProductReport,
 } = require('../controllers/invoices.controller');
+const { invoiceValidationRules, validate } = require('../middlewares/validateInvoice');
 
-// Reports (must go BEFORE /:id to avoid route conflicts)
 router.get('/reports/monthly', getMonthlyReport);
 router.get('/reports/by-product', getProductReport);
 
 router.get('/', getAllInvoices);
 router.get('/:id', getInvoiceById);
-router.post('/', createInvoice);
+router.post('/', invoiceValidationRules, validate, createInvoice);
 router.delete('/:id', deleteInvoice);
 
 module.exports = router;
