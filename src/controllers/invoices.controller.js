@@ -1,4 +1,50 @@
 const pool = require('../config/db');
+const fs = require('fs');
+const csv = require('csv-parser');
+
+const uploadInvoicesCSV = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  const results = [];
+  const errors = [];
+
+  fs.createReadStream(req.file.path)
+    .pipe(csv())
+    .on('data', (row) => {
+      results.push(row);
+    })
+    .on('end', async () => {
+      let insertedCount = 0;
+
+      for (const row of results) {
+        try {
+          const { invoice_date, product, category, customer, quantity, subtotal, tax } = row;
+          const total_amount = parseFloat(subtotal) + parseFloat(tax);
+
+          await pool.query(
+            `INSERT INTO invoices 
+              (invoice_date, product, category, customer, quantity, subtotal, tax, total_amount)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+            [invoice_date, product, category, customer, quantity || 1, subtotal, tax, total_amount]
+          );
+          insertedCount++;
+        } catch (error) {
+          errors.push({ row, error: error.message });
+        }
+      }
+
+      // Clean up: delete the temporary file after processing
+      fs.unlinkSync(req.file.path);
+
+      res.status(201).json({
+        message: `${insertedCount} invoices uploaded successfully`,
+        totalRows: results.length,
+        errors: errors.length > 0 ? errors : undefined,
+      });
+    });
+};
 
 // GET all invoices
 const getAllInvoices = async (req, res) => {
@@ -118,4 +164,5 @@ module.exports = {
   deleteInvoice,
   getMonthlyReport,
   getProductReport,
+  uploadInvoicesCSV,
 };
