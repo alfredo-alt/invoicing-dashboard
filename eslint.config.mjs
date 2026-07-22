@@ -24,6 +24,12 @@ export default defineConfig([
     },
   },
   {
+    files: ['src/server.js', 'src/config/db.js'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
+  {
     files: ['**/*.test.js', '**/*.spec.js'],
     languageOptions: {
       globals: globals.jest,
