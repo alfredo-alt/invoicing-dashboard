@@ -33,7 +33,8 @@ It was built as a hands-on way to apply real experience in data cleaning and ETL
 
 ## Project structure
 
-```
+```markdown
+```http
 invoicing-dashboard/
 ├── src/
 │   ├── config/
@@ -143,7 +144,8 @@ CREATE TABLE users (
 
 ## Example: creating an invoice
 
-```
+```markdown
+```http
 POST /api/invoices
 Authorization: Bearer <your_token>
 Content-Type: application/json
