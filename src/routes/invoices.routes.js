@@ -1,7 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const upload = require('../config/multer');
-const {
+import express from 'express';
+import { upload } from '../config/multer.js';
+import {
   getAllInvoices,
   getInvoiceById,
   createInvoice,
@@ -9,12 +8,14 @@ const {
   getMonthlyReport,
   getProductReport,
   uploadInvoicesCSV,
-} = require('../controllers/invoices.controller');
-const {
+} from '../controllers/invoices.controller.js';
+import {
   invoiceValidationRules,
   validate,
-} = require('../middlewares/validateInvoice');
-const verifyToken = require('../middlewares/authMiddleware');
+} from '../middlewares/validateInvoice.js';
+import { verifyToken } from '../middlewares/authMiddleware.js';
+
+const router = express.Router();
 
 // Public routes (no login required to view)
 router.get('/reports/monthly', getMonthlyReport);
@@ -27,4 +28,4 @@ router.post('/', verifyToken, invoiceValidationRules, validate, createInvoice);
 router.delete('/:id', verifyToken, deleteInvoice);
 router.post('/upload', verifyToken, upload.single('file'), uploadInvoicesCSV);
 
-module.exports = router;
+export default router;

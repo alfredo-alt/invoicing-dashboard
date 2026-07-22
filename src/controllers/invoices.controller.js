@@ -1,6 +1,6 @@
-const pool = require('../config/db');
-const fs = require('fs');
-const csv = require('csv-parser');
+import fs from 'fs';
+import { pool } from '../config/db.js';
+import csv from 'csv-parser';
 
 const uploadInvoicesCSV = async (req, res) => {
   if (!req.file) {
@@ -177,12 +177,12 @@ const getProductReport = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getAllInvoices,
   getInvoiceById,
-  createInvoice,
-  deleteInvoice,
   getMonthlyReport,
   getProductReport,
+  createInvoice,
+  deleteInvoice,
   uploadInvoicesCSV,
 };

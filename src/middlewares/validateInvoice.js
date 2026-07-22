@@ -1,4 +1,4 @@
-const { body, validationResult } = require('express-validator');
+import { body, validationResult } from 'express-validator';
 
 const invoiceValidationRules = [
   body('invoice_date')
@@ -23,4 +23,4 @@ const validate = (req, res, next) => {
   next();
 };
 
-module.exports = { invoiceValidationRules, validate };
+export { invoiceValidationRules, validate };

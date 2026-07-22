@@ -1,7 +1,9 @@
-const express = require('express');
-const invoicesRoutes = require('./routes/invoices.routes');
-const authRoutes = require('./routes/auth.routes');
-require('dotenv').config();
+import express from 'express';
+import invoicesRoutes from './routes/invoices.routes.js';
+import authRoutes from './routes/auth.routes.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -13,4 +15,4 @@ app.get('/', (req, res) => {
   res.json({ message: 'Invoicing API is running' });
 });
 
-module.exports = app;
+export { app };
