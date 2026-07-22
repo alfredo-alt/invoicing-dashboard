@@ -15,4 +15,4 @@ app.get('/', (req, res) => {
   res.json({ message: 'Invoicing API is running' });
 });
 
-export { app };
+export default app;

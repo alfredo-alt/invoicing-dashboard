@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { pool } from '../config/db.js';
+import pool from '../config/db.js';
 import csv from 'csv-parser';
 
 const uploadInvoicesCSV = async (req, res) => {
