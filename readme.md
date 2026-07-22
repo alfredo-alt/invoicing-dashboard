@@ -33,7 +33,7 @@ It was built as a hands-on way to apply real experience in data cleaning and ETL
 
 ## Project structure
 
-```markdown
+````markdown
 ```http
 invoicing-dashboard/
 ├── src/
@@ -55,32 +55,33 @@ invoicing-dashboard/
 ├── package.json
 └── README.md
 ```
+````
 
 ## API Endpoints
 
 ### Auth
 
-| Method | Endpoint | Description | Auth required |
-|---|---|---|---|
-| POST | `/api/auth/register` | Register a new user | No |
-| POST | `/api/auth/login` | Log in and receive a JWT token | No |
+| Method | Endpoint             | Description                    | Auth required |
+| ------ | -------------------- | ------------------------------ | ------------- |
+| POST   | `/api/auth/register` | Register a new user            | No            |
+| POST   | `/api/auth/login`    | Log in and receive a JWT token | No            |
 
 ### Invoices
 
-| Method | Endpoint | Description | Auth required |
-|---|---|---|---|
-| GET | `/api/invoices` | List all invoices | No |
-| GET | `/api/invoices/:id` | Get a single invoice by id | No |
-| POST | `/api/invoices` | Create a new invoice | Yes |
-| DELETE | `/api/invoices/:id` | Delete an invoice | Yes |
-| POST | `/api/invoices/upload` | Bulk upload invoices via CSV file | Yes |
+| Method | Endpoint               | Description                       | Auth required |
+| ------ | ---------------------- | --------------------------------- | ------------- |
+| GET    | `/api/invoices`        | List all invoices                 | No            |
+| GET    | `/api/invoices/:id`    | Get a single invoice by id        | No            |
+| POST   | `/api/invoices`        | Create a new invoice              | Yes           |
+| DELETE | `/api/invoices/:id`    | Delete an invoice                 | Yes           |
+| POST   | `/api/invoices/upload` | Bulk upload invoices via CSV file | Yes           |
 
 ### Reports
 
-| Method | Endpoint | Description | Auth required |
-|---|---|---|---|
-| GET | `/api/invoices/reports/monthly` | Total revenue grouped by month | No |
-| GET | `/api/invoices/reports/by-product` | Total revenue grouped by product | No |
+| Method | Endpoint                           | Description                      | Auth required |
+| ------ | ---------------------------------- | -------------------------------- | ------------- |
+| GET    | `/api/invoices/reports/monthly`    | Total revenue grouped by month   | No            |
+| GET    | `/api/invoices/reports/by-product` | Total revenue grouped by product | No            |
 
 ## Getting started
 
@@ -92,17 +93,20 @@ invoicing-dashboard/
 ### Installation
 
 1. Clone the repository
+
    ```bash
    git clone https://github.com/alfredo-alt/invoicing-dashboard.git
    cd invoicing-dashboard
    ```
 
 2. Install dependencies
+
    ```bash
    npm install
    ```
 
 3. Set up environment variables — copy `.env.example` to `.env` and fill in your own values:
+
    ```bash
    cp .env.example .env
    ```
@@ -144,7 +148,7 @@ CREATE TABLE users (
 
 ## Example: creating an invoice
 
-```markdown
+````markdown
 ```http
 POST /api/invoices
 Authorization: Bearer <your_token>
@@ -160,6 +164,7 @@ Content-Type: application/json
   "tax": 9.00
 }
 ```
+````
 
 ## Example: CSV upload format
 

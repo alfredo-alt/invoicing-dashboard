@@ -10,7 +10,10 @@ const {
   getProductReport,
   uploadInvoicesCSV,
 } = require('../controllers/invoices.controller');
-const { invoiceValidationRules, validate } = require('../middlewares/validateInvoice');
+const {
+  invoiceValidationRules,
+  validate,
+} = require('../middlewares/validateInvoice');
 const verifyToken = require('../middlewares/authMiddleware');
 
 // Public routes (no login required to view)
