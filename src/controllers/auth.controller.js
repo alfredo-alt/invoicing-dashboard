@@ -32,8 +32,7 @@ const register = async (req, res) => {
     res
       .status(201)
       .json({ message: 'User registered successfully', user: result.rows[0] });
-  } catch (error) {
-    console.error(error);
+  } catch {
     res.status(500).json({ error: 'Failed to register user' });
   }
 };
@@ -72,8 +71,7 @@ const login = async (req, res) => {
     );
 
     res.json({ message: 'Login successful', token });
-  } catch (error) {
-    console.error(error);
+  } catch {
     res.status(500).json({ error: 'Failed to login' });
   }
 };

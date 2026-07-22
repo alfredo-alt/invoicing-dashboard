@@ -70,8 +70,7 @@ const getAllInvoices = async (req, res) => {
       'SELECT * FROM invoices ORDER BY invoice_date DESC',
     );
     res.json(result.rows);
-  } catch (error) {
-    console.error(error);
+  } catch {
     res.status(500).json({ error: 'Failed to fetch invoices' });
   }
 };
@@ -87,8 +86,7 @@ const getInvoiceById = async (req, res) => {
       return res.status(404).json({ error: 'Invoice not found' });
     }
     res.json(result.rows[0]);
-  } catch (error) {
-    console.error(error);
+  } catch {
     res.status(500).json({ error: 'Failed to fetch invoice' });
   }
 };
@@ -117,8 +115,7 @@ const createInvoice = async (req, res) => {
       ],
     );
     res.status(201).json(result.rows[0]);
-  } catch (error) {
-    console.error(error);
+  } catch {
     res.status(500).json({ error: 'Failed to create invoice' });
   }
 };
@@ -135,8 +132,7 @@ const deleteInvoice = async (req, res) => {
       return res.status(404).json({ error: 'Invoice not found' });
     }
     res.json({ message: 'Invoice deleted successfully' });
-  } catch (error) {
-    console.error(error);
+  } catch {
     res.status(500).json({ error: 'Failed to delete invoice' });
   }
 };
@@ -156,8 +152,7 @@ const getMonthlyReport = async (req, res) => {
       ORDER BY month DESC
     `);
     res.json(result.rows);
-  } catch (error) {
-    console.error(error);
+  } catch {
     res.status(500).json({ error: 'Failed to generate monthly report' });
   }
 };
@@ -177,8 +172,7 @@ const getProductReport = async (req, res) => {
       ORDER BY total_revenue DESC
     `);
     res.json(result.rows);
-  } catch (error) {
-    console.error(error);
+  } catch {
     res.status(500).json({ error: 'Failed to generate product report' });
   }
 };
