@@ -12,12 +12,12 @@
   },
   "license": "ISC",
   "author": "",
-  "main": "src/app.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "dev": "nodemon src/app.js",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch --verbose",
+    "test:coverage": "jest --coverage --verbose",
+    "dev": "nodemon src/server.js",
     "format": "prettier --write ."
   },
   "dependencies": {
