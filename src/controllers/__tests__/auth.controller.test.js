@@ -1,6 +1,6 @@
-const { login } = require('../auth.controller');
-const pool = require('../../config/db');
-const bcrypt = require('bcrypt');
+import { login } from '../auth.controller.js';
+import pool from '../../config/db.js';
+import bcrypt from 'bcrypt';
 
 jest.mock('../../config/db');
 jest.mock('bcrypt');

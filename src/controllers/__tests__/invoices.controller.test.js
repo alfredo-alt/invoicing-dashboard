@@ -1,5 +1,5 @@
-const { getInvoiceById } = require('../invoices.controller');
-const pool = require('../../config/db');
+import { getInvoiceById } from '../invoices.controller.js';
+import pool from '../../config/db.js';
 
 jest.mock('../../config/db');
 

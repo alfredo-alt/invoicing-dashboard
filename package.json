@@ -13,7 +13,6 @@
   "license": "ISC",
   "author": "",
   "main": "src/server.js",
-  "type": "module",
   "scripts": {
     "test": "jest --verbose",
     "test:watch": "jest --watch --verbose",
